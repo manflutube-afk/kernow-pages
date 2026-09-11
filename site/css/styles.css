@@ -963,3 +963,31 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
     margin-top: 0.15rem;
   }
 }
+
+/* ---------- About page portrait ----------
+   Holding the shape a photo will eventually fill, so the page doesn't
+   reflow when one arrives. Same 4:5 card, logo centred inside it. */
+
+.portrait {
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.2rem;
+  text-align: center;
+  background: var(--chalk);
+  border: 1px solid var(--ink-12);
+}
+.portrait__mark {
+  width: min(180px, 46%);
+  height: auto;
+  margin-bottom: 0.6rem;
+}
+.portrait__name {
+  margin: 0;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+  letter-spacing: -0.02em;
+}
+.portrait .kernewek { margin-top: 0.15rem; }

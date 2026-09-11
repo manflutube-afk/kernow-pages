@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260911g">
+<link rel="stylesheet" href="css/styles.css?v=20260911h">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#000000">
@@ -56,9 +56,13 @@
     <div class="wrap">
       <div class="grid grid--2" data-reveal>
         <div>
-          <!-- Drop a photo of yourself in assets/ and swap this placeholder out -->
-          <div class="card" style="aspect-ratio:4/5; display:grid; place-items:center; background:var(--chalk); border:1px solid var(--ink-12); color:var(--ink); text-align:center">
-            <p style="margin:0; font-family:var(--font-head); font-size:1.2rem">Photo goes here<br><small style="font-family:var(--font-body); font-weight:300">assets/me.jpg</small></p>
+          <!-- Standing in until there's a photo. To swap it, replace this whole
+               block with: <img class="card portrait" src="assets/me.jpg" alt="..."> -->
+          <div class="card portrait">
+            <img class="portrait__mark" src="assets/logo.png" alt="Kernow Pages"
+                 width="180" height="168">
+            <p class="portrait__name">Kernow Pages</p>
+            <p class="kernewek">Onen hag oll <i>one and all</i></p>
           </div>
         </div>
         <div>
@@ -151,6 +155,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260911g"></script>
+<script src="js/main.js?v=20260911h"></script>
 </body>
 </html>
