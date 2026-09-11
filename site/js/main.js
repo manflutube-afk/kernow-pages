@@ -177,7 +177,7 @@
     return ' Please email me directly at ' + to + '.';
   };
 
-  var SENT_MESSAGE = "Thank you — that's with me. I'll reply within a working day.";
+  var SENT_MESSAGE = "Thank you — that's with me. I'll get back to you as soon as I can.";
 
   var thanks = document.getElementById('thanks');
   var thanksClose = document.getElementById('thanks-close');

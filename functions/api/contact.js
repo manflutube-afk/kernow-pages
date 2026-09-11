@@ -61,13 +61,17 @@ export async function onRequestPost({ request, env }) {
   // enquiry and deliberately not fatal — if this bounces because they mistyped
   // their address, the enquiry has still arrived and the visitor shouldn't be
   // told anything went wrong.
+  // Which domain this was submitted from, so the logo and the link in the
+  // acknowledgement always point at the site the visitor was actually on.
+  const site = env.SITE_URL || new URL(request.url).origin;
+
   const ack = await send(env, {
     from,
     to: [fields.email],
     reply_to: to,
     subject: 'Thanks for getting in touch — Kernow Pages',
-    text: ackText(fields),
-    html: ackHtml(fields)
+    text: ackText(fields, site, to),
+    html: ackHtml(fields, site, to)
   });
 
   if (!ack.ok) console.error('Acknowledgement send failed:', ack.error);
@@ -194,13 +198,13 @@ function htmlBody(f, request) {
 
 /* ---- The acknowledgement ---- */
 
-function ackText(f) {
+function ackText(f, site, replyTo) {
   const first = f.name.split(" ")[0] || f.name;
   return [
     "Hi " + first + ",",
     "",
     "Thanks for getting in touch about your website — your enquiry has come through",
-    "and I'll get back to you as soon as I possibly can, usually the same working day.",
+    "and I'll get back to you as soon as I possibly can.",
     "",
     "I read every one of these myself, so you'll be replying to a person and not a",
     "queue. If anything has changed in the meantime, just reply to this email and it",
@@ -213,17 +217,22 @@ function ackText(f) {
     "—",
     "Kernow Pages",
     "A small business helping small businesses",
-    "contact@leodiablo.com"
+    site,
+    replyTo
   ].join("\n");
 }
 
-function ackHtml(f) {
+function ackHtml(f, site, replyTo) {
   const first = esc(f.name.split(' ')[0] || f.name);
   return `<div style="font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#000;line-height:1.6;max-width:560px">
+  <a href="${site}" style="display:inline-block;text-decoration:none">
+    <img src="${site}/assets/email-logo.png" alt="Kernow Pages"
+         width="220" style="width:220px;max-width:100%;height:auto;display:block;border:0">
+  </a>
+  <hr style="margin:18px 0 24px;border:0;border-top:1px solid rgba(0,0,0,.12)">
   <p style="margin:0 0 16px">Hi ${first},</p>
   <p style="margin:0 0 16px">Thanks for getting in touch about your website — your enquiry has come
-    through and <strong>I'll get back to you as soon as I possibly can</strong>, usually the same
-    working day.</p>
+    through and <strong>I'll get back to you as soon as I possibly can</strong>.</p>
   <p style="margin:0 0 16px">I read every one of these myself, so you'll be replying to a person and
     not a queue. If anything's changed in the meantime, just reply to this email and it comes
     straight to me.</p>
@@ -233,9 +242,14 @@ function ackHtml(f) {
   <p style="margin:0;font-size:13px;color:rgba(0,0,0,.62)">
     <strong style="color:#000">Kernow Pages</strong><br>
     A small business helping small businesses<br>
-    <a href="mailto:contact@leodiablo.com" style="color:#0E7C86">contact@leodiablo.com</a>
+    <a href="${site}" style="color:#0E7C86;font-weight:600">${prettyHost(site)}</a><br>
+    <a href="mailto:${esc(replyTo)}" style="color:#0E7C86">${esc(replyTo)}</a>
   </p>
 </div>`;
+}
+
+function prettyHost(site) {
+  try { return new URL(site).host; } catch (e) { return site; }
 }
 
 function esc(s) {

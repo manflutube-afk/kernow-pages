@@ -903,7 +903,7 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   padding: clamp(1.6rem, 6vw, 2.6rem);
   text-align: center;
 }
-.thanks__mark { width: 56px; height: auto; margin-bottom: 0.6rem; }
+.thanks__mark { width: 72px; height: auto; margin-bottom: 0.7rem; }
 .thanks h2 { margin: 0; }
 .thanks .kernewek { margin-top: 0.35rem; }
 .thanks__lead { margin: 1rem 0 0.8rem; }
@@ -931,4 +931,35 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   .work-card:hover .work-card__thumb { transform: none; }
   .nav a:hover::after { right: 100%; }
   .service:hover, .plan:hover, .card:hover { transform: none; }
+}
+
+/* ---------- Add-ons table on a phone ----------
+   Two columns inside a 460px minimum meant the table could only be read by
+   dragging it sideways. Below 560px each row becomes a stacked block — the
+   add-on on one line, the price under it — so it reads straight down with
+   no sideways scrolling and the header row becomes redundant. */
+
+@media (max-width: 560px) {
+  table.addons {
+    min-width: 0;
+    display: block;
+    padding: 0.4rem 0.2rem;
+  }
+  table.addons thead { display: none; }
+  table.addons tbody,
+  table.addons tr,
+  table.addons td { display: block; width: 100%; }
+  table.addons tr {
+    padding: 0.9rem 1.1rem;
+    border-bottom: 1px solid var(--ink-12);
+  }
+  table.addons tr:last-child { border-bottom: 0; }
+  table.addons td { padding: 0; border: 0; }
+  table.addons td:first-child { font-weight: 500; }
+  table.addons td:last-child {
+    white-space: normal;
+    font-weight: 400;
+    color: var(--ink-60);
+    margin-top: 0.15rem;
+  }
 }
