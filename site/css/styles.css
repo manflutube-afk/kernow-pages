@@ -258,7 +258,10 @@ p { margin: 0 0 1.1em; max-width: 68ch; }
   transform: translateY(101%);
   transition: transform .34s cubic-bezier(.3,.9,.3,1);
 }
-.btn:hover, .btn:focus-visible { transform: translateY(-3px); }
+/* The black fill rises on hover, so the label has to flip to white or it
+   vanishes against it. Variants that fill with something light — the ghost
+   button on a dark section, and the inverted button — set it back below. */
+.btn:hover, .btn:focus-visible { transform: translateY(-3px); --btn-fg: #fff; }
 .btn:hover::before, .btn:focus-visible::before { transform: translateY(0); }
 
 .btn--ghost {
