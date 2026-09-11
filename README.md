@@ -212,6 +212,14 @@ the business name in them. For real screenshots, drop them in `assets/` and
 replace `<div class="work-card__thumb">Name</div>` with
 `<img class="work-card__thumb" src="assets/name.jpg" alt="…">`.
 
+**Cache busting.** The stylesheet and script are linked with a version
+string — `css/styles.css?v=20260911`. The HTML itself is never cached, but the
+CSS and JS are held by browsers for an hour, so without this a visitor who saw
+the old design keeps seeing it. **Whenever you change `styles.css` or
+`main.js`, bump that number in all six HTML files** (find and replace the
+date). Otherwise your changes won't reach anyone who has been to the site
+before — including you.
+
 **Security headers** are in `site/_headers`. The Content-Security-Policy there
 allows Google Fonts and nothing else — if you add a third-party script, an
 embedded map or a tracking pixel, it will be blocked until you add its origin.
