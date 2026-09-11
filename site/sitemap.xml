@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Update the lastmod dates when a page's content genuinely changes.
+     Stale or dishonest dates are worse than none at all. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://kernowpages.leodiablo.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://kernowpages.leodiablo.com/work</loc><priority>0.9</priority></url>
-  <url><loc>https://kernowpages.leodiablo.com/pricing</loc><priority>0.9</priority></url>
-  <url><loc>https://kernowpages.leodiablo.com/about</loc><priority>0.7</priority></url>
-  <url><loc>https://kernowpages.leodiablo.com/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://kernowpages.leodiablo.com/</loc><lastmod>2026-09-11</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://kernowpages.leodiablo.com/work</loc><lastmod>2026-09-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kernowpages.leodiablo.com/pricing</loc><lastmod>2026-09-11</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://kernowpages.leodiablo.com/about</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://kernowpages.leodiablo.com/contact</loc><lastmod>2026-09-11</lastmod><changefreq>yearly</changefreq><priority>0.8</priority></url>
 </urlset>

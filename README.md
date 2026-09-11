@@ -45,8 +45,10 @@ That starts `wrangler pages dev`, which serves `site/` *and* runs the contact
 function, exactly as production does — clean URLs, `_headers` and all. It
 prints the port it picked.
 
-Opening `site/index.html` straight off disk still works for quick CSS tweaks,
-but the form won't, because there's no function behind it.
+Opening `site/index.html` straight off disk no longer works for navigation —
+internal links are root-relative (`/about`, not `about.html`) so that clicking
+one doesn't cost a 308 redirect. Off disk those resolve to your filesystem
+root. Use `npm run dev`.
 
 ## Deploying
 
@@ -232,6 +234,28 @@ before — including you.
 **Security headers** are in `site/_headers`. The Content-Security-Policy there
 allows Google Fonts and nothing else — if you add a third-party script, an
 embedded map or a tracking pixel, it will be blocked until you add its origin.
+
+## SEO
+
+Each page has a unique title, a meta description, a canonical URL, Open Graph
+and Twitter card tags, exactly one `h1`, and alt text on every image.
+`robots.txt` points at `sitemap.xml`, and the sitemap carries `lastmod` dates —
+**update those when a page's content genuinely changes**, because stale dates
+are worse than none.
+
+The home page carries a `ProfessionalService` block of JSON-LD: the business
+name, the service area, the contact address, and the three packages with their
+prices. That's what gets a rich result in local search, so keep the prices in
+it matching `pricing.html` — they're in two places and will drift otherwise.
+
+Internal links point at the clean URL (`/about`) rather than the file
+(`about.html`). Cloudflare 308-redirects the latter to the former, so linking
+to files wasted a round trip on every click and on every crawl.
+
+One outstanding item: `www.kernowpages.leodiablo.com` serves the same site.
+Every canonical tag names the version without `www`, so search engines will
+consolidate on it and this isn't urgent — but the tidy fix is a Cloudflare
+Redirect Rule sending `www.*` to the bare hostname.
 
 ## Accessibility and motion
 
