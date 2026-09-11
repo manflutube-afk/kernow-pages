@@ -1,0 +1,9 @@
+# Cloudflare Pages project config.
+#
+# `site` is what gets uploaded as static assets. `functions/` sits outside it
+# and is compiled into the Pages Functions worker automatically — one file per
+# route, so functions/api/contact.js serves POST /api/contact.
+
+name = "kernow-pages"
+compatibility_date = "2026-09-10"
+pages_build_output_dir = "site"

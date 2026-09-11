@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Kernow Pages</title>
+<meta name="description" content="Tell me about your business and I'll come back with a price and a timeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://kernowpages.leodiablo.com/contact">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kernow Pages">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://kernowpages.leodiablo.com/contact">
+<meta property="og:title" content="Contact — Kernow Pages">
+<meta property="og:description" content="Tell me about your business and I'll come back with a price and a timeline.">
+<meta property="og:image" content="https://kernowpages.leodiablo.com/assets/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo.png" alt="" width="34" height="32">Kernow Pages</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="btn" aria-current="page">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="section section--tight" style="position:relative; overflow:hidden">
+    <div class="glow glow--b" style="opacity:.38"></div>
+    <div class="wrap">
+      <h1>Start a project</h1>
+      <p class="lede">Tell me roughly what you're after. I'll come back within a working day with a price and a timeline — no charge, no sales call.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap">
+      <div class="grid grid--2">
+
+        <div>
+          <!-- Posts to the Pages Function in functions/api/contact.js, which
+               hands the enquiry to Resend. js/main.js intercepts the submit and
+               sends it with fetch; with JavaScript off the browser posts the
+               form natively and the function redirects back here. -->
+          <form class="form" id="contact-form" action="/api/contact" method="POST"
+                data-email="contact@leodiablo.com">
+            <!-- Honeypot. Off-screen, so only a bot fills it in. -->
+            <div class="hp" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field">
+              <label for="business">Business name</label>
+              <input id="business" name="business" type="text" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="budget">Rough budget</label>
+              <select id="budget" name="budget">
+                <option>Not sure yet</option>
+                <option>Around £300</option>
+                <option>Around £650</option>
+                <option>£1,400 or more</option>
+                <option>I'd rather pay monthly</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="message">What do you need?</label>
+              <textarea id="message" name="message" required placeholder="What the business does, whether you've got a site now, and what's not working about it."></textarea>
+            </div>
+            <div>
+              <button class="btn" type="submit" id="form-submit">Send enquiry</button>
+            </div>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-note">I only use your details to reply to you. Nothing gets passed on to anyone.</p>
+          </form>
+        </div>
+
+        <div>
+          <div class="card">
+            <h3>Or just get hold of me</h3>
+            <p class="kernewek">Kestava <i>contact</i></p>
+            <ul class="contact-list" style="margin-top:1.2rem">
+              <li><strong>Email</strong><a href="mailto:contact@leodiablo.com">contact@leodiablo.com</a></li>
+              <li><strong>Where</strong>Cornwall — everything done by email</li>
+              <li><strong>Usual reply time</strong>Same day, weekdays</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:1.5rem">
+            <h3>Handy to know before you write</h3>
+            <p>If you already own a domain name, mention it. If you've got a Facebook page with your photos and opening hours on it, send the link — that's usually half the site written already.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="index.html"><img class="brand__mark" src="assets/logo-white.png" alt="" width="34" height="32">Kernow Pages</a>
+        <p style="margin-top:0.8rem">A small business helping small businesses.</p>
+        <p class="kernewek">Onen hag oll <i>one and all</i></p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="mailto:contact@leodiablo.com">contact@leodiablo.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> Kernow Pages</span>
+      <span>Built in Cornwall</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

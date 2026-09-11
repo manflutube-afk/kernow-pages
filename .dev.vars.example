@@ -1,0 +1,13 @@
+# Copy this file to `.dev.vars` for local development with `npm run dev`.
+# `.dev.vars` is gitignored — never commit a real key.
+#
+# In production these are set against the Pages project with:
+#   npx wrangler pages secret put RESEND_API_KEY
+
+# Resend API key — https://resend.com/api-keys
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+
+# Optional. The function falls back to these same values if unset.
+# CONTACT_FROM must be on a domain verified in Resend.
+CONTACT_TO=contact@leodiablo.com
+CONTACT_FROM=Kernow Pages <enquiries@leodiablo.com>

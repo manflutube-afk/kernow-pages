@@ -1,0 +1,18 @@
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Cloudflare — local secrets and build cache. Never commit .dev.vars.
+.dev.vars
+.wrangler/
+.env
