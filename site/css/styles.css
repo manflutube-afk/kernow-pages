@@ -882,3 +882,53 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   display: inline-block;
 }
 .hero .kernewek { margin-top: -0.4rem; margin-bottom: 1.1rem; }
+
+/* ---------- Thank-you dialog ----------
+   Native <dialog>, so Escape and the focus trap are handled by the browser.
+   Sized off the viewport so it behaves on a phone as well as a desktop. */
+
+.thanks {
+  width: min(30rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-lift);
+  overflow: auto;
+}
+.thanks::backdrop { background: rgba(0, 0, 0, 0.58); }
+.thanks__inner {
+  padding: clamp(1.6rem, 6vw, 2.6rem);
+  text-align: center;
+}
+.thanks__mark { width: 56px; height: auto; margin-bottom: 0.6rem; }
+.thanks h2 { margin: 0; }
+.thanks .kernewek { margin-top: 0.35rem; }
+.thanks__lead { margin: 1rem 0 0.8rem; }
+.thanks__note { font-size: 0.92rem; color: var(--ink-60); margin: 0 0 1.6rem; }
+.thanks .btn { width: 100%; }
+
+/* A short, quiet entrance — and none at all for anyone who asked for less. */
+@media (prefers-reduced-motion: no-preference) {
+  .thanks[open] { animation: thanks-in .26s cubic-bezier(.3, .9, .3, 1); }
+  @keyframes thanks-in {
+    from { opacity: 0; transform: translateY(10px); }
+  }
+}
+
+/* ---------- Touch screens ----------
+   A phone has no pointer to hover with, but tapping still latches :hover —
+   so a card you touched stays lifted and zoomed until you tap something
+   else. Nothing should move just because someone put a finger on it.
+   Colour changes stay; they read as a tap acknowledgement rather than
+   something sliding about. */
+
+@media (hover: none) {
+  .btn:hover { transform: none; }
+  .work-card:hover { transform: none; box-shadow: var(--shadow-soft); }
+  .work-card:hover .work-card__thumb { transform: none; }
+  .nav a:hover::after { right: 100%; }
+  .service:hover, .plan:hover, .card:hover { transform: none; }
+}

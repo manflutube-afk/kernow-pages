@@ -120,8 +120,17 @@ file — `_redirects` only matches paths, not hostnames.
 `functions/api/contact.js`. The function validates the fields, then hands the
 enquiry to [Resend](https://resend.com) to deliver.
 
+Two emails go out per submission: the enquiry to `CONTACT_TO`, with reply-to
+set to whoever filled the form in, and an acknowledgement back to them saying
+you'll be in touch as soon as possible, with reply-to set to you. The
+acknowledgement is sent second and is deliberately non-fatal — if someone
+mistypes their address the enquiry has still arrived, and they aren't told
+anything went wrong.
+
 `js/main.js` intercepts the submit and sends it with `fetch`, so the page never
-reloads. With JavaScript switched off the browser posts the form natively and
+reloads. On success it opens a native `<dialog>` thank-you pop-up, which gives
+Escape, the focus trap and the backdrop for free on phones as well as desktop;
+if `<dialog>` isn't available the inline status line underneath still shows. With JavaScript switched off the browser posts the form natively and
 the function redirects back to `/contact?sent=1` or `/contact?error=…`, which
 the same script picks up on load. Both paths work.
 

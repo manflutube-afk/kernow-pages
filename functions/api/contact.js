@@ -42,6 +42,42 @@ export async function onRequestPost({ request, env }) {
   const to = env.CONTACT_TO || DEFAULT_TO;
   const from = env.CONTACT_FROM || DEFAULT_FROM;
 
+  // The enquiry itself. If this can't be sent, the whole thing failed.
+  const sent = await send(env, {
+    from,
+    to: [to],
+    reply_to: fields.email,
+    subject: `Website enquiry — ${fields.name}${fields.business ? ` (${fields.business})` : ''}`,
+    text: plainBody(fields, request),
+    html: htmlBody(fields, request)
+  });
+
+  if (!sent.ok) {
+    console.error('Enquiry send failed:', sent.error);
+    return fail(request, 'We could not send that just now.', 502);
+  }
+
+  // The acknowledgement to whoever filled the form in. Deliberately after the
+  // enquiry and deliberately not fatal — if this bounces because they mistyped
+  // their address, the enquiry has still arrived and the visitor shouldn't be
+  // told anything went wrong.
+  const ack = await send(env, {
+    from,
+    to: [fields.email],
+    reply_to: to,
+    subject: 'Thanks for getting in touch — Kernow Pages',
+    text: ackText(fields),
+    html: ackHtml(fields)
+  });
+
+  if (!ack.ok) console.error('Acknowledgement send failed:', ack.error);
+
+  return succeed(request);
+}
+
+/* ---- Sending ---- */
+
+async function send(env, payload) {
   let res;
   try {
     res = await fetch('https://api.resend.com/emails', {
@@ -50,26 +86,13 @@ export async function onRequestPost({ request, env }) {
         Authorization: `Bearer ${env.RESEND_API_KEY}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        reply_to: fields.email,
-        subject: `Website enquiry — ${fields.name}${fields.business ? ` (${fields.business})` : ''}`,
-        text: plainBody(fields, request),
-        html: htmlBody(fields, request)
-      })
+      body: JSON.stringify(payload)
     });
   } catch (err) {
-    console.error('Resend request failed', err);
-    return fail(request, 'We could not send that just now.', 502);
+    return { ok: false, error: String(err) };
   }
-
-  if (!res.ok) {
-    console.error('Resend returned', res.status, await res.text());
-    return fail(request, 'We could not send that just now.', 502);
-  }
-
-  return succeed(request);
+  if (!res.ok) return { ok: false, error: `${res.status} ${await res.text()}` };
+  return { ok: true };
 }
 
 /* Anything that isn't a POST gets a straight answer rather than the 404 page. */
@@ -165,6 +188,52 @@ function htmlBody(f, request) {
   <p style="margin:0;font-size:12px;color:rgba(7,32,58,.62)">
     Sent from the Kernow Pages contact form &middot; ${esc(new Date().toUTCString())}
     &middot; country: ${esc(request.headers.get('cf-ipcountry') || 'unknown')}
+  </p>
+</div>`;
+}
+
+/* ---- The acknowledgement ---- */
+
+function ackText(f) {
+  const first = f.name.split(" ")[0] || f.name;
+  return [
+    "Hi " + first + ",",
+    "",
+    "Thanks for getting in touch about your website — your enquiry has come through",
+    "and I'll get back to you as soon as I possibly can, usually the same working day.",
+    "",
+    "I read every one of these myself, so you'll be replying to a person and not a",
+    "queue. If anything has changed in the meantime, just reply to this email and it",
+    "comes straight to me.",
+    "",
+    "Here's what you sent me:",
+    "",
+    f.message,
+    "",
+    "—",
+    "Kernow Pages",
+    "A small business helping small businesses",
+    "contact@leodiablo.com"
+  ].join("\n");
+}
+
+function ackHtml(f) {
+  const first = esc(f.name.split(' ')[0] || f.name);
+  return `<div style="font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#000;line-height:1.6;max-width:560px">
+  <p style="margin:0 0 16px">Hi ${first},</p>
+  <p style="margin:0 0 16px">Thanks for getting in touch about your website — your enquiry has come
+    through and <strong>I'll get back to you as soon as I possibly can</strong>, usually the same
+    working day.</p>
+  <p style="margin:0 0 16px">I read every one of these myself, so you'll be replying to a person and
+    not a queue. If anything's changed in the meantime, just reply to this email and it comes
+    straight to me.</p>
+  <p style="margin:24px 0 6px;font-weight:600;font-size:14px">Here's what you sent me</p>
+  <p style="margin:0;padding:14px 16px;background:#F4F4F2;border-radius:12px;white-space:pre-wrap;font-size:14px">${esc(f.message)}</p>
+  <hr style="margin:28px 0 16px;border:0;border-top:1px solid rgba(0,0,0,.12)">
+  <p style="margin:0;font-size:13px;color:rgba(0,0,0,.62)">
+    <strong style="color:#000">Kernow Pages</strong><br>
+    A small business helping small businesses<br>
+    <a href="mailto:contact@leodiablo.com" style="color:#0E7C86">contact@leodiablo.com</a>
   </p>
 </div>`;
 }

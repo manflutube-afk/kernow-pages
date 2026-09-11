@@ -179,10 +179,35 @@
 
   var SENT_MESSAGE = "Thank you — that's with me. I'll reply within a working day.";
 
+  var thanks = document.getElementById('thanks');
+  var thanksClose = document.getElementById('thanks-close');
+
+  /* The dialog is the nice version. If <dialog> isn't supported, or it refuses
+     to open for any reason, the inline status line is still there underneath. */
+  var celebrate = function (email) {
+    showStatus(SENT_MESSAGE, false);
+    if (!thanks || typeof thanks.showModal !== 'function') return;
+    var target = document.getElementById('thanks-email');
+    if (target && email) target.textContent = email;
+    try {
+      thanks.showModal();
+    } catch (e) {
+      /* already open, or not attached — the status line has it covered */
+    }
+  };
+
+  if (thanks && thanksClose) {
+    thanksClose.addEventListener('click', function () { thanks.close(); });
+    /* Clicking the backdrop closes it too, which is what people expect. */
+    thanks.addEventListener('click', function (e) {
+      if (e.target === thanks) thanks.close();
+    });
+  }
+
   if (status) {
     var params = new URLSearchParams(window.location.search);
     if (params.get('sent')) {
-      showStatus(SENT_MESSAGE, false);
+      celebrate('');
       if (form) form.reset();
     } else if (params.get('error')) {
       showStatus(params.get('error') + fallbackLine(), true);
@@ -218,8 +243,9 @@
         })
         .then(function (data) {
           if (data && data.ok) {
+            var email = (new FormData(form)).get('email') || '';
             form.reset();
-            showStatus(SENT_MESSAGE, false);
+            celebrate(email);
           } else {
             showStatus(((data && data.error) || 'Something went wrong sending that.') + fallbackLine(), true);
           }
