@@ -2,7 +2,7 @@
   "name": "kernow-pages",
   "version": "1.0.0",
   "private": true,
-  "description": "Kernow Pages — websites and apps for Cornish businesses",
+  "description": "Kernow Pages — websites for Cornish businesses",
   "scripts": {
     "dev": "wrangler pages dev",
     "deploy": "wrangler pages deploy",

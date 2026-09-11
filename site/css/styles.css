@@ -472,9 +472,11 @@ p { margin: 0 0 1.1em; max-width: 68ch; }
 .service {
   border-top: 5px solid var(--sea);
 }
+/* Three cards, three clearly different rules. The light gold sat too close
+   to the deep gold when they were side by side. */
 .service:nth-child(2) { border-top-color: var(--gold); }
-.service:nth-child(3) { border-top-color: var(--sun); }
-.service:nth-child(4) { border-top-color: var(--mint); }
+.service:nth-child(3) { border-top-color: var(--mint); }
+.service:nth-child(4) { border-top-color: var(--sun); }
 
 /* Work cards */
 
