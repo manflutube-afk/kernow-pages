@@ -991,3 +991,45 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   letter-spacing: -0.02em;
 }
 .portrait .kernewek { margin-top: 0.15rem; }
+
+/* ---------- Revamp panel ----------
+   A revamp is a different job from a new build, so it gets its own band on
+   the pricing page rather than a fourth column that unbalances the packages.
+   Text on the left, the price and the call to action on the right. */
+
+.revamp {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.revamp__price {
+  padding-left: clamp(1.2rem, 3vw, 2.2rem);
+  border-left: 1px solid var(--ink-12);
+}
+/* .card p paints every paragraph grey with no bottom margin, which suits a
+   one-line card but not a panel of prose. Body copy and the price both get
+   their proper colour and spacing back. */
+.revamp p { color: var(--ink); margin-bottom: 1rem; }
+.revamp p:last-child { margin-bottom: 0; }
+.revamp .lede { color: var(--ink-60); }
+.revamp__price .plan__price { margin-top: 0; color: var(--ink); margin-bottom: 0.4rem; }
+.revamp__price .plan__price small { color: var(--ink-60); }
+.revamp__price .plan__note { color: var(--ink-60); margin-bottom: 1.2rem; }
+.revamp__price .btn { width: 100%; margin-top: 0.4rem; }
+
+@media (max-width: 760px) {
+  .revamp { grid-template-columns: 1fr; }
+  .revamp__price {
+    padding-left: 0;
+    padding-top: 1.4rem;
+    border-left: 0;
+    border-top: 1px solid var(--ink-12);
+  }
+}
+
+/* Four service cards need four columns on a wide screen, otherwise the last
+   one sits on its own row looking like an afterthought. */
+@media (min-width: 1000px) {
+  .grid--services { grid-template-columns: repeat(4, 1fr); }
+}
