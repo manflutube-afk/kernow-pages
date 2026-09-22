@@ -1048,6 +1048,7 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 .support-btn {
   --support-bg: var(--gold);
   --support-fg: var(--ink);
+  --support-heart: #C0272D;   /* deep red, so it holds against the gold */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1067,17 +1068,17 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   box-shadow: 0 12px 26px -16px rgba(232, 163, 23, 0.9);
   transition: transform .22s cubic-bezier(.3,.9,.3,1), box-shadow .22s ease;
 }
-/* A heart each side of the label, drawn as a mask so it always matches the
-   button's own text colour rather than needing a recoloured image. Both are
+/* A heart each side of the label, drawn as a mask off an inline SVG so its
+   colour is a token rather than a second image to keep in step. Both are
    decorative: the label carries the meaning, and empty pseudo-element content
    is skipped by screen readers. */
 .support-btn::before,
 .support-btn::after {
   content: "";
   flex: 0 0 auto;
-  width: 1em;
-  height: 1em;
-  background: currentColor;
+  width: 1.35em;
+  height: 1.35em;
+  background: var(--support-heart);
   -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021.35l-1.45-1.32C5.4%2015.36%202%2012.28%202%208.5%202%205.42%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.09C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.42%2022%208.5c0%203.78-3.4%206.86-8.55%2011.54L12%2021.35z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
           mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021.35l-1.45-1.32C5.4%2015.36%202%2012.28%202%208.5%202%205.42%204.42%203%207.5%203c1.74%200%203.41.81%204.5%202.09C13.09%203.81%2014.76%203%2016.5%203%2019.58%203%2022%205.42%2022%208.5c0%203.78-3.4%206.86-8.55%2011.54L12%2021.35z%22%2F%3E%3C%2Fsvg%3E") center / contain no-repeat;
 }
