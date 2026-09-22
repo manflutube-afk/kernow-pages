@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20260922c">
+<link rel="stylesheet" href="css/styles.css?v=20260922d">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#000000">
@@ -171,7 +171,7 @@
         <h4>Chip in</h4>
         <p>Some of the sites I build are free, for people who need one and genuinely can&rsquo;t pay for it. If you&rsquo;d like to help cover what it costs to keep them running &mdash; domains, storage, the tools &mdash; you can do that here.</p>
       </div>
-      <a class="support-btn" href="https://ko-fi.com/Z3L227GK6I" target="_blank" rel="noopener">
+      <a class="support-btn" href="https://ko-fi.com/kernow" target="_blank" rel="noopener">
           <img src="assets/kofi-cup.png" alt="" width="22" height="18" loading="lazy">
           Help Support Me Support Others</a>
     </div>
@@ -182,6 +182,19 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260922c"></script>
+<!-- The Ko-fi form itself, opened by any .support-btn. The iframe src is left
+     empty until it's opened: embedding it on load would let Ko-fi see every
+     visitor on every page, and cost a third-party request nobody asked for. -->
+<dialog class="kofi" id="kofi" aria-labelledby="kofi-title">
+  <div class="kofi__bar">
+    <h2 id="kofi-title">Support Kernow Pages</h2>
+    <button type="button" class="kofi__close" id="kofi-close" aria-label="Close">&times;</button>
+  </div>
+  <iframe class="kofi__frame" id="kofi-frame" title="Ko-fi support form" src="about:blank"></iframe>
+  <p class="kofi__fallback">Not loading? <a href="https://ko-fi.com/kernow" target="_blank" rel="noopener">Open it on Ko-fi instead</a>.</p>
+</dialog>
+
+<script src="js/main.js?v=20260922d"></script>
+
 </body>
 </html>

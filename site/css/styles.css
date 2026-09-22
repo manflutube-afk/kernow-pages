@@ -1224,3 +1224,68 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 @media (max-width: 720px) {
   .give__foot { grid-template-columns: 1fr; justify-items: start; }
 }
+
+/* ---------- Ko-fi modal ----------
+   Ko-fi's own page in an iframe, so supporters never leave the site. Sized
+   off the viewport because their form is tall and phones are not. */
+
+.kofi {
+  width: min(460px, calc(100vw - 1.5rem));
+  max-width: 100%;
+  height: min(720px, calc(100vh - 2rem));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+.kofi::backdrop { background: rgba(0, 0, 0, 0.6); }
+.kofi__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0.9rem 0.9rem 1.3rem;
+  background: var(--ink);
+  color: #fff;
+}
+.kofi__bar h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #fff;
+}
+.kofi__close {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.kofi__close:hover, .kofi__close:focus-visible { background: rgba(255, 255, 255, 0.3); }
+.kofi__frame {
+  display: block;
+  width: 100%;
+  height: calc(100% - 96px);
+  border: 0;
+  background: var(--chalk);
+}
+.kofi__fallback {
+  margin: 0;
+  padding: 0.55rem 1.3rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--ink-60);
+  background: var(--chalk);
+}
+.kofi__fallback a { color: var(--sea); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .kofi[open] { animation: thanks-in .26s cubic-bezier(.3, .9, .3, 1); }
+}

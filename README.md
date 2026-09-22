@@ -235,6 +235,34 @@ before — including you.
 allows Google Fonts and nothing else — if you add a third-party script, an
 embedded map or a tracking pixel, it will be blocked until you add its origin.
 
+## The support button
+
+Every page carries a Ko-fi support button. Clicking it opens Ko-fi's own
+donation form in a modal (`<dialog class="kofi">`) so nobody has to leave the
+site to chip in. The handle is `ko-fi.com/kernow`.
+
+Ko-fi's official widget is deliberately not used: `draw()` writes with
+`document.writeln`, it loads Quicksand as a third typeface, it wiggles on a
+loop, and it needs the CSP opened up for its script. The button here is plain
+markup and their cup icon is served from `site/assets/`.
+
+Two things worth knowing if you touch this:
+
+- **`frame-src https://ko-fi.com` in `site/_headers` is what allows the
+  embed.** `frame-src` otherwise falls back to `default-src 'self'` and the
+  iframe fails silently. Nothing else may be framed.
+- **The iframe has no `src` until the modal is first opened.** Embedding it on
+  load would let Ko-fi see every visitor on every page and cost a third-party
+  request nobody asked for. The `<dialog>` must also sit *above* the
+  `main.js` script tag, or `getElementById` runs before it exists.
+
+The button is an ordinary link to ko-fi.com underneath, so with JavaScript off,
+or if `<dialog>` isn't supported, it still works — it just opens Ko-fi in a new
+tab instead. There's a "Not loading?" link in the modal for the same reason.
+
+Automated browsers get a 403 from Ko-fi (Cloudflare bot detection), so the
+embed can't be checked with a headless browser — test it in a real one.
+
 ## SEO
 
 Each page has a unique title, a meta description, a canonical URL, Open Graph

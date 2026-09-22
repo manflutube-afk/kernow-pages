@@ -263,6 +263,40 @@
     });
   }
 
+  /* ---- Ko-fi support modal ----
+     The support buttons are ordinary links to ko-fi.com, so they still work
+     with JavaScript off or if <dialog> isn't supported. When it is, the click
+     is intercepted and Ko-fi's own form opens in a modal instead, so nobody
+     has to leave the site to chip in. The iframe isn't given a src until the
+     first open, which keeps Ko-fi out of every page load.               */
+  var kofi = document.getElementById('kofi');
+  var kofiFrame = document.getElementById('kofi-frame');
+  var kofiClose = document.getElementById('kofi-close');
+  var kofiButtons = document.querySelectorAll('.support-btn');
+  var KOFI_EMBED = 'https://ko-fi.com/kernow/?hidefeed=true&widget=true&embed=true&preview=true';
+
+  if (kofi && kofiFrame && kofiButtons.length && typeof kofi.showModal === 'function') {
+    var kofiLoaded = false;
+
+    kofiButtons.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (!kofiLoaded) {
+          kofiFrame.src = KOFI_EMBED;
+          kofiLoaded = true;
+        }
+        try {
+          kofi.showModal();
+        } catch (err) {
+          window.open(btn.href, '_blank', 'noopener');
+        }
+      });
+    });
+
+    if (kofiClose) kofiClose.addEventListener('click', function () { kofi.close(); });
+    kofi.addEventListener('click', function (e) { if (e.target === kofi) kofi.close(); });
+  }
+
   /* ---- Footer year ---- */
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();

@@ -7,10 +7,14 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), interest-cohort=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; frame-src https://ko-fi.com; base-uri 'self'; object-src 'none'
 
 # 'unsafe-inline' in style-src is there for the handful of inline style="..."
 # attributes in the HTML. Strip those and you can drop it.
+#
+# frame-src names ko-fi.com because the support button opens their donation
+# form in a modal. frame-src otherwise falls back to default-src 'self', which
+# would block it silently. Nothing else may be framed.
 
 # CSS and JS aren't fingerprinted, so keep the cache short enough that an edit
 # shows up the same day without a hard refresh.
