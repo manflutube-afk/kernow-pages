@@ -244,7 +244,10 @@ site to chip in. The handle is `ko-fi.com/kernow`.
 Ko-fi's official widget is deliberately not used: `draw()` writes with
 `document.writeln`, it loads Quicksand as a third typeface, it wiggles on a
 loop, and it needs the CSP opened up for its script. The button here is plain
-markup and their cup icon is served from `site/assets/`.
+markup with a heart either side of the label, drawn as a CSS mask off an
+inline SVG so it always takes the button's own text colour — change
+`--support-bg`/`--support-fg` and the hearts follow. No image file to keep in
+step, and nothing extra to load.
 
 Two things worth knowing if you touch this:
 
