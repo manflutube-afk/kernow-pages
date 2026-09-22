@@ -992,35 +992,35 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 }
 .portrait .kernewek { margin-top: 0.15rem; }
 
-/* ---------- Revamp panel ----------
-   A revamp is a different job from a new build, so it gets its own band on
-   the pricing page rather than a fourth column that unbalances the packages.
-   Text on the left, the price and the call to action on the right. */
+/* ---------- Split card ----------
+   Prose on the left, a price and a call to action on the right. Used by both
+   the "something bigger" and "already got a website" panels, which are each a
+   different job from the four routes above and earn the room to say so. */
 
-.revamp {
+.split-card {
   display: grid;
   grid-template-columns: 1.35fr 0.65fr;
   gap: clamp(1.5rem, 4vw, 3rem);
   align-items: center;
 }
-.revamp__price {
+.split-card__aside {
   padding-left: clamp(1.2rem, 3vw, 2.2rem);
   border-left: 1px solid var(--ink-12);
 }
 /* .card p paints every paragraph grey with no bottom margin, which suits a
    one-line card but not a panel of prose. Body copy and the price both get
    their proper colour and spacing back. */
-.revamp p { color: var(--ink); margin-bottom: 1rem; }
-.revamp p:last-child { margin-bottom: 0; }
-.revamp .lede { color: var(--ink-60); }
-.revamp__price .plan__price { margin-top: 0; color: var(--ink); margin-bottom: 0.4rem; }
-.revamp__price .plan__price small { color: var(--ink-60); }
-.revamp__price .plan__note { color: var(--ink-60); margin-bottom: 1.2rem; }
-.revamp__price .btn { width: 100%; margin-top: 0.4rem; }
+.split-card p { color: var(--ink); margin-bottom: 1rem; }
+.split-card p:last-child { margin-bottom: 0; }
+.split-card .lede { color: var(--ink-60); }
+.split-card__aside .plan__price { margin-top: 0; color: var(--ink); margin-bottom: 0.4rem; }
+.split-card__aside .plan__price small { color: var(--ink-60); }
+.split-card__aside .plan__note { color: var(--ink-60); margin-bottom: 1.2rem; }
+.split-card__aside .btn { width: 100%; margin-top: 0.4rem; }
 
 @media (max-width: 760px) {
-  .revamp { grid-template-columns: 1fr; }
-  .revamp__price {
+  .split-card { grid-template-columns: 1fr; }
+  .split-card__aside {
     padding-left: 0;
     padding-top: 1.4rem;
     border-left: 0;
@@ -1032,4 +1032,195 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
    one sits on its own row looking like an afterthought. */
 @media (min-width: 1000px) {
   .grid--services { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ---------- Support button ----------
+   Ko-fi's own widget was not used: it writes with document.writeln, pulls in
+   Quicksand as a third typeface, wiggles on a loop, and needs the CSP opened
+   up for its script and images. This goes to the same place — ko-fi.com — with
+   their cup icon served from our own assets, and none of that baggage.
+
+   To use Ko-fi's blue instead of the site's teal, change --support-bg below
+   to #72a4f2 and --support-fg to #fff. */
+
+.support-btn {
+  --support-bg: var(--sea);
+  --support-fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 999px;
+  background: var(--support-bg);
+  color: var(--support-fg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 12px 26px -16px rgba(14, 124, 134, 0.9);
+  transition: transform .22s cubic-bezier(.3,.9,.3,1), box-shadow .22s ease;
+}
+.support-btn img {
+  width: 22px;
+  height: auto;
+  flex: 0 0 auto;
+}
+.support-btn:hover,
+.support-btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 32px -16px rgba(14, 124, 134, 0.95);
+}
+@media (hover: none) {
+  .support-btn:hover { transform: none; }
+}
+
+/* The strip above the copyright line, on every page. */
+.footer-support {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.2rem, 4vw, 2.5rem);
+  align-items: center;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-top: clamp(1.6rem, 4vw, 2.2rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+.footer-support h4 {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+.footer-support p {
+  margin: 0;
+  max-width: 62ch;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.96rem;
+}
+@media (max-width: 720px) {
+  .footer-support {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .support-btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* ---------- The four routes ----------
+   Two by two rather than a row of four: these are read, not skimmed, and the
+   free one has to carry as much weight as the paid ones or the whole point of
+   the page collapses into a footnote. */
+
+@media (min-width: 880px) {
+  .grid--routes { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* "Half price" and "Free" are words, not numerals, and need far less room. */
+.plan__price--words {
+  font-size: clamp(1.7rem, 1.4rem + 1.1vw, 2.2rem);
+}
+
+.plan__flag--quiet {
+  background: var(--ink);
+  color: #fff;
+}
+.plan__flag--free {
+  background: var(--mint);
+  color: var(--ink);
+}
+
+.plan--cause { outline: 3px solid var(--mint); }
+
+/* The free route is the one that matters most, so it gets the black card.
+   Everything inside has to be re-lit against it. */
+.plan--free {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow-lift);
+}
+.plan--free h3 { color: #fff; }
+.plan--free .plan__note { color: rgba(255, 255, 255, 0.72); }
+.plan--free .plan__price { color: #fff; }
+.plan--free .plan__price small { color: rgba(255, 255, 255, 0.72); }
+.plan--free li { color: rgba(255, 255, 255, 0.86); }
+.plan--free .plan__aftercare {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.86);
+}
+.plan--free .plan__aftercare strong { color: #fff; }
+.plan--free .btn--ghost {
+  --btn-fg: #fff;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+.plan--free .btn--ghost::before { background: #fff; }
+.plan--free .btn--ghost:hover,
+.plan--free .btn--ghost:focus-visible { --btn-fg: var(--ink); }
+
+/* ---------- The free-build panel ----------
+   The point of the whole site, so it gets a bordered panel of its own rather
+   than another row of cards. Numbered because it's a sequence, and the last
+   step is the one that pays for the first two. */
+
+.give {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.6rem, 5vw, 3.2rem);
+  background: var(--white);
+}
+.give__head { max-width: 62ch; }
+.give__head h2 { margin-top: 0.2rem; }
+.give__head .lede { margin-top: 0.8rem; }
+
+.give__steps {
+  list-style: none;
+  counter-reset: none;
+  padding: 0;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2.4rem);
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.give__steps li { margin: 0; }
+.give__steps h3 { margin: 0.9rem 0 0.35rem; font-size: 1.2rem; }
+.give__steps p { margin: 0; color: var(--ink-60); }
+
+.give__num {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.give__steps li:nth-child(2) .give__num { background: var(--gold); color: var(--ink); }
+.give__steps li:nth-child(3) .give__num { background: var(--mint); color: var(--ink); }
+
+.give__foot {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(1.2rem, 4vw, 2.4rem);
+  align-items: center;
+  margin-top: clamp(1.8rem, 4vw, 2.6rem);
+  padding-top: clamp(1.4rem, 3vw, 2rem);
+  border-top: 1px solid var(--ink-12);
+}
+.give__foot p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--ink-60);
+}
+@media (max-width: 720px) {
+  .give__foot { grid-template-columns: 1fr; justify-items: start; }
 }
