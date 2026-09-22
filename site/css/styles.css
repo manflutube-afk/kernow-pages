@@ -1289,3 +1289,12 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 @media (prefers-reduced-motion: no-preference) {
   .kofi[open] { animation: thanks-in .26s cubic-bezier(.3, .9, .3, 1); }
 }
+
+/* The free route reads as prose rather than a feature list, so its paragraphs
+   need the spacing a list would otherwise have provided. */
+.plan__free-lead {
+  margin: 0 0 0.9rem;
+  color: rgba(255, 255, 255, 0.86);
+}
+.plan__free-lead + .plan__aftercare { margin-top: 0.4rem; }
+.plan--free .btn { margin-top: auto; }
