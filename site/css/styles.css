@@ -1040,12 +1040,14 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
    up for its script and images. This goes to the same place — ko-fi.com — with
    their cup icon served from our own assets, and none of that baggage.
 
-   To use Ko-fi's blue instead of the site's teal, change --support-bg below
-   to #72a4f2 and --support-fg to #fff. */
+   It uses the site's own button colour so it reads as part of the site rather
+   than a bolted-on widget, and that gold carries on both the white panel and
+   the black footer. The hearts follow --support-fg automatically. For Ko-fi's
+   blue instead, set --support-bg to #72a4f2 and --support-fg to #fff. */
 
 .support-btn {
-  --support-bg: var(--sea);
-  --support-fg: #fff;
+  --support-bg: var(--gold);
+  --support-fg: var(--ink);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1053,13 +1055,16 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
   padding: 0.8rem 1.5rem;
   border-radius: 999px;
   background: var(--support-bg);
+  /* .site-footer a is more specific than .support-btn and would paint the
+     label white on the gold, so the colour is pinned at higher specificity
+     here. The hearts follow it through currentColor. */
   color: var(--support-fg);
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  box-shadow: 0 12px 26px -16px rgba(14, 124, 134, 0.9);
+  box-shadow: 0 12px 26px -16px rgba(232, 163, 23, 0.9);
   transition: transform .22s cubic-bezier(.3,.9,.3,1), box-shadow .22s ease;
 }
 /* A heart each side of the label, drawn as a mask so it always matches the
@@ -1079,11 +1084,14 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 .support-btn:hover,
 .support-btn:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 18px 32px -16px rgba(14, 124, 134, 0.95);
+  box-shadow: 0 18px 32px -16px rgba(232, 163, 23, 0.95);
 }
 @media (hover: none) {
   .support-btn:hover { transform: none; }
 }
+
+.site-footer .support-btn,
+.site-footer .support-btn:hover { color: var(--support-fg); text-decoration: none; }
 
 /* The strip above the copyright line, on every page. */
 .footer-support {
