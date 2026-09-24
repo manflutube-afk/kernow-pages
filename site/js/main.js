@@ -10,6 +10,34 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- A refresh starts the page over ----
+     Browsers normally put you back where you were on reload, and keep any
+     #section in the address. On a refresh only, drop both and go to the top.
+     Following a link to page.html#section still lands on that section, and
+     the back button still remembers where you were.                     */
+  var nav0 = window.performance && performance.getEntriesByType
+    ? performance.getEntriesByType('navigation')[0]
+    : null;
+  var reloaded = nav0
+    ? nav0.type === 'reload'
+    : !!(window.performance && performance.navigation && performance.navigation.type === 1);
+
+  if (reloaded) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    document.querySelectorAll('form').forEach(function (f) { f.reset(); });
+    var toTop = function () { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); };
+    toTop();
+    // Late layout (fonts, images) can nudge things, so make sure once more.
+    window.addEventListener('load', toTop);
+  }
+  // Leave restoration on for back/forward, which should keep your place.
+  window.addEventListener('pagehide', function () {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'auto';
+  });
+
   /* ---- Mobile navigation ---- */
   var toggle = document.querySelector('.nav-toggle');
   var nav = document.querySelector('.nav');
