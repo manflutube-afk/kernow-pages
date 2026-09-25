@@ -306,6 +306,20 @@ p { margin: 0 0 1.1em; max-width: 68ch; }
 }
 
 .hero h1 { max-width: 12ch; }
+
+/* The logo sits to the left of the headline, roughly two lines tall. */
+.hero__title {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  margin-bottom: clamp(1.3rem, 0.8rem + 2.2vw, 2.5rem); /* half the h1 size, as h1's own margin was */
+}
+.hero__title h1 { margin: 0; }
+.hero__logo {
+  flex: none;
+  width: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  height: auto;
+}
 .hero h1 .swash {
   font-variation-settings: "SOFT" 40, "WONK" 1;
   font-style: italic;
