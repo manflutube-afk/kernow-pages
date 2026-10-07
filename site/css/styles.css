@@ -1414,7 +1414,7 @@ a.logo-tiles:hover, a.logo-tiles:focus-visible { transform: translateY(-4px); }
   object-fit: cover;
   transition: transform .5s cubic-bezier(.2,.7,.3,1);
 }
-.logo-shot--light img, .logo-shot--wide img { object-fit: contain; }
+.logo-shot--light img, .logo-shot--wide img, .logo-shot--fit img { object-fit: contain; }
 .logo-shot:hover img, .logo-shot:focus-visible img { transform: scale(1.04); }
 
 /* The enlarged picture. Just the image on a dark backdrop. */
