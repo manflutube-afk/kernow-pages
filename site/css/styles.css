@@ -758,6 +758,8 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 .step__num::before { content: counter(step); }
 .step h3 { margin-bottom: 0.2rem; }
 .step p { margin: 0; color: var(--ink-60); }
+/* .step p comes after .section--dark p, so without this the text is grey on black. */
+.section--dark .step p { color: rgba(255,255,255,0.72); }
 
 /* ---------- Forms ---------- */
 
@@ -1332,49 +1334,111 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 .plan--free .btn { margin-top: auto; }
 
 /* ---------- Logo design ----------
-   The home page section, then the brief that pops up from it. The brief is a
-   native <dialog> like the others: a fixed black bar with the close button,
-   and a body that scrolls, so a long form still fits a phone screen. */
+   The /logo-design page, the band that points to it from the home page, and
+   the brief that pops up from either. The brief is a native <dialog> like the
+   others: a fixed black bar with the close button, and a body that scrolls,
+   so a long form still fits a phone screen. */
 
-.logo-design {
+.section--dark .eyebrow { color: #fff; }
+.section--dark .eyebrow::before { background: #fff; }
+
+.logo-hero .wrap,
+.logo-band .wrap {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
 }
 @media (max-width: 900px) {
-  .logo-design { grid-template-columns: 1fr; }
+  .logo-hero .wrap, .logo-band .wrap { grid-template-columns: 1fr; }
 }
-.logo-design h2 { margin-top: 0.2rem; }
-.logo-design__card h3 { margin-bottom: 1rem; }
+.logo-hero h1 { max-width: 13ch; }
 
-.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
-.ticks li {
-  position: relative;
-  padding-left: 2rem;
-  color: var(--ink-60);
+/* Three logos as tiles: one wide across the top, two underneath. */
+.logo-tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
 }
-.ticks li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.15em;
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  background: var(--mint);
+a.logo-tiles { transition: transform .3s cubic-bezier(.2,.7,.3,1); }
+a.logo-tiles:hover, a.logo-tiles:focus-visible { transform: translateY(-4px); }
+.logo-tile {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #000;
 }
-.ticks li::after {
-  content: "";
-  position: absolute;
-  left: 0.42rem;
-  top: 0.38em;
-  width: 0.36rem;
-  height: 0.62rem;
-  border: solid var(--ink);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+.logo-tile--wide { grid-column: 1 / -1; aspect-ratio: 2 / 1; }
+.logo-tile--light { background: #fff; }
+
+/* One case study per logo: the story on the left, the pictures on the right. */
+.logo-case {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--ink-12);
 }
+.logo-case:first-of-type { margin-top: clamp(2rem, 4vw, 3rem); }
+@media (max-width: 900px) {
+  .logo-case { grid-template-columns: 1fr; }
+}
+.logo-case h3 { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem); margin-bottom: 0.3rem; }
+.logo-case__text > p:not(.work-card__meta) { color: var(--ink-60); }
+.logo-case__more { margin-top: 1rem; }
+.logo-case__more a { color: var(--sea); font-weight: 500; }
+
+.logo-case__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+.logo-shot {
+  display: block;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+  box-shadow: var(--shadow-soft);
+}
+.logo-shot--wide { grid-column: 1 / -1; aspect-ratio: 4 / 3; }
+.logo-case__gallery--single .logo-shot--wide { aspect-ratio: 16 / 10; }
+.logo-shot--light { background: #fff; border: 1px solid var(--ink-12); }
+.logo-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.logo-shot--light img, .logo-shot--wide img { object-fit: contain; }
+.logo-shot:hover img, .logo-shot:focus-visible img { transform: scale(1.04); }
+
+/* The enlarged picture. Just the image on a dark backdrop. */
+.lightbox {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow: visible;
+}
+.lightbox::backdrop { background: rgba(0, 0, 0, 0.88); }
+.lightbox img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(1300px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  border-radius: 14px;
+  background: #fff;
+}
+.lightbox__close { position: fixed; top: 1rem; right: 1rem; background: rgba(255, 255, 255, 0.2); }
 
 .brief {
   width: min(680px, calc(100vw - 1rem));

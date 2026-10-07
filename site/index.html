@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=20261007a">
+<link rel="stylesheet" href="css/styles.css?v=20261007b">
 <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta name="theme-color" content="#000000">
@@ -34,7 +34,7 @@
   "image": "https://kernowpages.leodiablo.com/assets/og-image.jpg",
   "email": "contact@leodiablo.com",
   "priceRange": "££",
-  "serviceType": "Website design and development",
+  "serviceType": ["Website design and development", "Logo design"],
   "knowsLanguage": ["en-GB", "kw"],
   "areaServed": { "@type": "AdministrativeArea", "name": "Cornwall, United Kingdom" },
   "makesOffer": [
@@ -46,6 +46,8 @@
       "priceSpecification": { "@type": "PriceSpecification", "price": "895", "priceCurrency": "GBP", "minPrice": "895" } },
     { "@type": "Offer", "name": "Website revamp or rebuild", "description": "Rebuilding an existing website, keeping what still works.",
       "priceSpecification": { "@type": "PriceSpecification", "price": "225", "priceCurrency": "GBP", "minPrice": "225" } },
+    { "@type": "Offer", "name": "Logo design", "description": "Logo design from a written brief, priced to the job.",
+      "url": "https://kernowpages.leodiablo.com/logo-design" },
     { "@type": "Offer", "name": "Supported build", "description": "A website built free of charge for anyone who needs one and genuinely cannot pay. Running costs are covered by voluntary supporter contributions rather than by the recipient.",
       "priceSpecification": { "@type": "PriceSpecification", "price": "0", "priceCurrency": "GBP" } }
   ]
@@ -64,6 +66,7 @@
     <nav class="nav" id="nav">
       <a href="/" aria-current="page">Home</a>
       <a href="/work">Work</a>
+      <a href="/logo-design">Logos</a>
       <a href="/pricing">Pricing</a>
       <a href="/about">About</a>
       <a href="/contact" class="btn">Start a project</a>
@@ -183,35 +186,6 @@
     </div>
   </section>
 
-  <section class="section" id="logo-design" style="padding-top:0">
-    <div class="wrap">
-      <div class="logo-design" data-reveal>
-        <div>
-          <p class="eyebrow">Logo design</p>
-          <h2>A logo that looks like you mean it.</h2>
-          <p class="lede">Plenty of the businesses I build for have no logo at all, or one knocked up years ago that falls apart on a sign or a van. I design those too &mdash; on their own, or alongside a website.</p>
-          <p>Fill in a short brief. It asks the questions I&rsquo;d ask you over a coffee, and I&rsquo;ll come back with first thoughts and a price.</p>
-          <div class="btn-row">
-            <!-- A link to /contact, so it still goes somewhere useful without
-                 JavaScript. js/main.js opens the brief in a pop-up instead. -->
-            <a class="btn" href="/contact" data-logo-brief>Start your logo brief</a>
-          </div>
-        </div>
-        <div class="card logo-design__card">
-          <h3>What the brief covers</h3>
-          <ul class="ticks">
-            <li>What your business does, and who it&rsquo;s for</li>
-            <li>Whether it&rsquo;s a brand-new logo or a refresh</li>
-            <li>The feel you&rsquo;re after, and the colours you like</li>
-            <li>Logos you admire, and anything to steer clear of</li>
-            <li>Where it&rsquo;ll be used &mdash; signs, vans, menus, socials</li>
-            <li>When you need it, and roughly what you can spend</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section class="section section--dark">
     <div class="wrap">
       <div data-reveal>
@@ -293,6 +267,25 @@
     </div>
   </section>
 
+  <section class="section section--dark logo-band" id="logo-design">
+    <div class="wrap">
+      <div data-reveal>
+        <p class="eyebrow">Logo design</p>
+        <h2>Need a logo to go with it?</h2>
+        <p class="lede">I design those too: for caf&eacute;s, bands, trades and anyone whose logo was knocked up years ago and falls apart on a sign or a van. Fill in a short brief and I&rsquo;ll come back with first thoughts and a price.</p>
+        <div class="btn-row">
+          <a class="btn" href="/logo-design">See logo design</a>
+          <a class="btn btn--ghost" href="/logo-design#brief">Start your logo brief</a>
+        </div>
+      </div>
+      <a class="logo-tiles" href="/logo-design" aria-label="See recent logo design work" data-reveal>
+        <img class="logo-tile logo-tile--wide" src="assets/logos/loaded-scone-logo.jpg" alt="The Loaded Scone logo" width="1200" height="900" loading="lazy" decoding="async">
+        <img class="logo-tile" src="assets/logos/voice-actor-logo.jpg" alt="A voice actor's sound-wave logo" width="509" height="382" loading="lazy" decoding="async">
+        <img class="logo-tile logo-tile--light" src="assets/logos/word-of-mouth-monogram.jpg" alt="The Word of Mouth monogram" width="793" height="595" loading="lazy" decoding="async">
+      </a>
+    </div>
+  </section>
+
   <section class="section section--tight">
     <div class="wrap">
       <div class="card" style="text-align:center; padding-block: clamp(2.5rem,6vw,4rem)" data-reveal>
@@ -320,6 +313,7 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/work">Work</a></li>
+          <li><a href="/logo-design">Logo design</a></li>
           <li><a href="/pricing">Pricing</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
@@ -347,202 +341,6 @@
   </div>
 </footer>
 
-<!-- The logo brief, opened by [data-logo-brief]. Posts to the same Pages
-     Function as the contact form (functions/api/contact.js) with form=logo,
-     which emails it on through Resend. -->
-<dialog class="brief" id="logo-brief" aria-labelledby="logo-brief-title">
-  <div class="brief__bar">
-    <h2 id="logo-brief-title">Your logo brief</h2>
-    <button type="button" class="brief__close" id="logo-brief-close" aria-label="Close">&times;</button>
-  </div>
-
-  <div class="brief__body">
-    <form class="form brief__form" id="logo-form" action="/api/contact" method="POST"
-          data-email="contact@leodiablo.com">
-      <input type="hidden" name="form" value="logo">
-      <!-- Honeypot. Off-screen, so only a bot fills it in. -->
-      <div class="hp" aria-hidden="true">
-        <label for="logo-website">Website</label>
-        <input id="logo-website" name="website" type="text" tabindex="-1" autocomplete="off">
-      </div>
-
-      <p class="brief__intro">Answer as much or as little as you like &mdash; only the starred questions are needed. If you&rsquo;re not sure about something, say so. Working that out is part of the job.</p>
-
-      <fieldset>
-        <legend>About you</legend>
-        <div class="field-row">
-          <div class="field">
-            <label for="logo-name">Your name <span class="req" aria-hidden="true">*</span></label>
-            <input id="logo-name" name="name" type="text" required autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="logo-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input id="logo-email" name="email" type="email" required autocomplete="email">
-          </div>
-        </div>
-        <div class="field">
-          <label for="logo-phone">Phone</label>
-          <input id="logo-phone" name="phone" type="tel" autocomplete="tel">
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>Your business</legend>
-        <div class="field-row">
-          <div class="field">
-            <label for="logo-business">Business name <span class="req" aria-hidden="true">*</span></label>
-            <input id="logo-business" name="business" type="text" required autocomplete="organization">
-          </div>
-          <div class="field">
-            <label for="logo-location">Where are you based?</label>
-            <input id="logo-location" name="location" type="text" placeholder="e.g. Truro, or online only">
-          </div>
-        </div>
-        <div class="field">
-          <label for="logo-about">What does the business do? <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="logo-about" name="about" required minlength="10" placeholder="What you sell or offer, and what makes you different from the others doing it."></textarea>
-        </div>
-        <div class="field">
-          <label for="logo-customers">Who are your customers?</label>
-          <textarea id="logo-customers" name="customers" class="short" placeholder="Locals, tourists, families, trades, other businesses &mdash; whoever walks through the door most."></textarea>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="logo-stage">How long have you been trading?</label>
-            <select id="logo-stage" name="stage">
-              <option>Not started yet</option>
-              <option>Less than a year</option>
-              <option>One to five years</option>
-              <option>More than five years</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="logo-personality">Three words that sum the business up</label>
-            <input id="logo-personality" name="personality" type="text" placeholder="e.g. friendly, local, reliable">
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>The logo</legend>
-        <div class="field">
-          <label for="logo-current">Is this a brand-new logo, or a refresh?</label>
-          <select id="logo-current" name="current">
-            <option>Brand new &mdash; I don&rsquo;t have one</option>
-            <option>A refresh of the one I&rsquo;ve got</option>
-            <option>Not sure yet</option>
-          </select>
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="logo-text">Exactly what should it say?</label>
-            <input id="logo-text" name="logoText" type="text" placeholder="Usually just the business name">
-          </div>
-          <div class="field">
-            <label for="logo-tagline">A tagline, if you have one</label>
-            <input id="logo-tagline" name="tagline" type="text" placeholder="e.g. Fresh from the harbour">
-          </div>
-        </div>
-        <div class="field">
-          <label for="logo-type">What sort of logo do you picture?</label>
-          <select id="logo-type" name="logoType">
-            <option>Not sure &mdash; help me decide</option>
-            <option>Just the name, nicely lettered</option>
-            <option>A symbol alongside the name</option>
-            <option>A badge or emblem</option>
-            <option>Initials or a monogram</option>
-          </select>
-        </div>
-        <div class="field">
-          <span class="field__label" id="logo-style-label">How should it feel? Tick any that fit</span>
-          <div class="checks" role="group" aria-labelledby="logo-style-label">
-            <label class="check"><input type="checkbox" name="style" value="Modern"> Modern</label>
-            <label class="check"><input type="checkbox" name="style" value="Classic"> Classic</label>
-            <label class="check"><input type="checkbox" name="style" value="Friendly"> Friendly</label>
-            <label class="check"><input type="checkbox" name="style" value="Bold"> Bold</label>
-            <label class="check"><input type="checkbox" name="style" value="Elegant"> Elegant</label>
-            <label class="check"><input type="checkbox" name="style" value="Playful"> Playful</label>
-            <label class="check"><input type="checkbox" name="style" value="Rustic / handmade"> Rustic or handmade</label>
-            <label class="check"><input type="checkbox" name="style" value="Coastal / Cornish"> Coastal or Cornish</label>
-            <label class="check"><input type="checkbox" name="style" value="Premium"> Premium</label>
-          </div>
-        </div>
-        <div class="field">
-          <label for="logo-colours">Colours you like, or already use</label>
-          <input id="logo-colours" name="colours" type="text" placeholder="e.g. navy and gold &mdash; or &ldquo;no idea&rdquo;">
-        </div>
-        <div class="field">
-          <label for="logo-inspiration">Any logos you like the look of?</label>
-          <textarea id="logo-inspiration" name="inspiration" class="short" placeholder="Any business, anywhere. Names or links, and what it is you like about them."></textarea>
-        </div>
-        <div class="field">
-          <label for="logo-avoid">Anything to steer clear of?</label>
-          <textarea id="logo-avoid" name="avoid" class="short" placeholder="Colours, symbols or styles you don&rsquo;t want &mdash; including anything a competitor already uses."></textarea>
-        </div>
-        <div class="field">
-          <span class="field__label" id="logo-uses-label">Where will it be used? Tick any</span>
-          <div class="checks" role="group" aria-labelledby="logo-uses-label">
-            <label class="check"><input type="checkbox" name="uses" value="Website"> Website</label>
-            <label class="check"><input type="checkbox" name="uses" value="Social media"> Social media</label>
-            <label class="check"><input type="checkbox" name="uses" value="Shop sign"> Shop sign</label>
-            <label class="check"><input type="checkbox" name="uses" value="Van or vehicle"> Van or vehicle</label>
-            <label class="check"><input type="checkbox" name="uses" value="Business cards and print"> Business cards &amp; print</label>
-            <label class="check"><input type="checkbox" name="uses" value="Menus or price lists"> Menus or price lists</label>
-            <label class="check"><input type="checkbox" name="uses" value="Clothing and uniforms"> Clothing &amp; uniforms</label>
-            <label class="check"><input type="checkbox" name="uses" value="Packaging and labels"> Packaging &amp; labels</label>
-          </div>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend>The practical bits</legend>
-        <div class="field-row">
-          <div class="field">
-            <label for="logo-deadline">When do you need it?</label>
-            <select id="logo-deadline" name="deadline">
-              <option>No rush</option>
-              <option>Within a month</option>
-              <option>Within a couple of weeks</option>
-              <option>By a set date &mdash; I&rsquo;ll say below</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="logo-budget">Rough budget</label>
-            <select id="logo-budget" name="budget">
-              <option>Not sure yet</option>
-              <option>Something simple and affordable</option>
-              <option>Happy to invest in it properly</option>
-              <option>Alongside a website from you</option>
-              <option>I can&rsquo;t pay at the moment</option>
-            </select>
-          </div>
-        </div>
-        <div class="field">
-          <label for="logo-extra">Anything else I should know?</label>
-          <textarea id="logo-extra" name="extra" class="short" placeholder="A launch date, a story behind the name, an idea you&rsquo;ve been sketching on the back of receipts&hellip;"></textarea>
-        </div>
-      </fieldset>
-
-      <div>
-        <button class="btn" type="submit" id="logo-submit">Send my brief</button>
-      </div>
-      <p class="form-status" id="logo-status" role="status" aria-live="polite"></p>
-      <p class="form-note">I only use your details to reply to you. Nothing gets passed on to anyone.</p>
-    </form>
-
-    <!-- Swapped in for the form once the brief has gone. -->
-    <div class="thanks__inner brief__done" id="logo-done" hidden>
-      <img class="thanks__mark" src="assets/logo.png" alt="" width="56" height="52">
-      <h2 tabindex="-1" id="logo-done-title">Thank you</h2>
-      <p class="kernewek">Meur ras <i>thank you</i></p>
-      <p class="thanks__lead">Your brief is with me, and I&rsquo;ll be in touch as soon as I can with some first thoughts and a price.</p>
-      <p class="thanks__note">I&rsquo;ve sent a copy to <strong id="logo-done-email">your inbox</strong>.
-        If it isn&rsquo;t there in a minute or two, have a look in your spam folder.</p>
-      <button type="button" class="btn" id="logo-done-close">Close</button>
-    </div>
-  </div>
-</dialog>
-
 <!-- The Ko-fi form itself, opened by any .support-btn. The iframe src is left
      empty until it's opened: embedding it on load would let Ko-fi see every
      visitor on every page, and cost a third-party request nobody asked for. -->
@@ -555,7 +353,7 @@
   <p class="kofi__fallback">Not loading? <a href="https://ko-fi.com/kernow" target="_blank" rel="noopener">Open it on Ko-fi instead</a>.</p>
 </dialog>
 
-<script src="js/main.js?v=20261007a"></script>
+<script src="js/main.js?v=20261007b"></script>
 
 </body>
 </html>

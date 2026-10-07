@@ -16,11 +16,13 @@ package.json            Just wrangler + the three scripts below
 functions/
   api/contact.js        POST /api/contact — validates the enquiry, sends it
                         via Resend. The file path IS the route. Also takes
-                        the home page's logo brief (form=logo).
+                        the logo brief (form=logo).
 
 site/                   Everything here is uploaded as a static asset
   index.html            Home — hero with the live-typing browser mock-up
   work.html             Portfolio, cards link out to the live client sites
+  logo-design.html      Logo design: case studies, FAQ, and the pop-up logo
+                        brief, which opens by itself at /logo-design#brief
   pricing.html          Packages, one-off / monthly toggle, add-ons, FAQ
   about.html            About you
   contact.html          Enquiry form + contact details
@@ -32,7 +34,9 @@ site/                   Everything here is uploaded as a static asset
   js/main.js            Every behaviour. One guarded block per feature.
   assets/               logo.png (black) and logo-white.png for dark sections,
                         favicons, og-image.jpg, and work/ — the portfolio
-                        screenshots, one JPEG per client site
+                        screenshots, one JPEG per client site, and logos/ —
+                        the logo samples (big ones also come as -720 for the
+                        page; the full size opens when tapped)
 ```
 
 ## Running it locally

@@ -340,6 +340,21 @@
       if (el) el.addEventListener('click', function () { brief.close(); });
     });
 
+    // The home page links to /logo-design#brief, which opens it straight away.
+    // The #brief comes off again on close, so it doesn't stick in a shared link.
+    var openFromHash = function () {
+      if (window.location.hash !== '#brief' || brief.open) return;
+      briefReset();
+      try { brief.showModal(); } catch (err) { /* the page is still there */ }
+    };
+    openFromHash();
+    window.addEventListener('hashchange', openFromHash);
+    brief.addEventListener('close', function () {
+      if (window.location.hash === '#brief') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+
     briefForm.addEventListener('submit', function (e) {
       e.preventDefault();
       if (briefSending) return;
@@ -392,6 +407,35 @@
             briefSubmit.textContent = 'Send my brief';
           }
         });
+    });
+  }
+
+  /* ---- Logo pictures, enlarged ----
+     Each [data-lightbox] is a plain link to the full-size image, so it still
+     works without JavaScript. With it, the picture opens over the page.  */
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxLinks = document.querySelectorAll('[data-lightbox]');
+
+  if (lightbox && lightboxImg && lightboxLinks.length && typeof lightbox.showModal === 'function') {
+    lightboxLinks.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var thumb = link.querySelector('img');
+        lightboxImg.src = link.href;
+        lightboxImg.alt = thumb ? thumb.alt : '';
+        try {
+          lightbox.showModal();
+        } catch (err) {
+          window.location.href = link.href;
+        }
+      });
+    });
+    var lightboxClose = document.getElementById('lightbox-close');
+    if (lightboxClose) lightboxClose.addEventListener('click', function () { lightbox.close(); });
+    // Anywhere at all closes it, the picture included: there's nothing to click on.
+    lightbox.addEventListener('click', function (e) {
+      if (e.target !== lightboxClose) lightbox.close();
     });
   }
 
