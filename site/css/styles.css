@@ -1330,3 +1330,150 @@ table.addons td:last-child { white-space: nowrap; font-weight: 500; }
 }
 .plan__free-lead + .plan__aftercare { margin-top: 0.4rem; }
 .plan--free .btn { margin-top: auto; }
+
+/* ---------- Logo design ----------
+   The home page section, then the brief that pops up from it. The brief is a
+   native <dialog> like the others: a fixed black bar with the close button,
+   and a body that scrolls, so a long form still fits a phone screen. */
+
+.logo-design {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .logo-design { grid-template-columns: 1fr; }
+}
+.logo-design h2 { margin-top: 0.2rem; }
+.logo-design__card h3 { margin-bottom: 1rem; }
+
+.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem; }
+.ticks li {
+  position: relative;
+  padding-left: 2rem;
+  color: var(--ink-60);
+}
+.ticks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  background: var(--mint);
+}
+.ticks li::after {
+  content: "";
+  position: absolute;
+  left: 0.42rem;
+  top: 0.38em;
+  width: 0.36rem;
+  height: 0.62rem;
+  border: solid var(--ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.brief {
+  width: min(680px, calc(100vw - 1rem));
+  max-width: 100%;
+  max-height: calc(100vh - 1rem);
+  max-height: calc(100dvh - 1rem);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+/* Only when open — a closed <dialog> has to stay display:none. */
+.brief[open] { display: flex; flex-direction: column; }
+.brief::backdrop { background: rgba(0, 0, 0, 0.6); }
+.brief__bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0.9rem 0.9rem 1.3rem;
+  background: var(--ink);
+  color: #fff;
+}
+.brief__bar h2 { margin: 0; font-size: 1.1rem; color: #fff; }
+.brief__close {
+  flex: 0 0 auto;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.brief__close:hover, .brief__close:focus-visible { background: rgba(255, 255, 255, 0.3); }
+.brief__body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.2rem, 4vw, 2rem);
+}
+.brief__form { max-width: none; gap: 1.6rem; }
+.brief__intro { margin: 0; color: var(--ink-60); }
+.brief fieldset {
+  border: 0;
+  margin: 0;
+  padding: 1.6rem 0 0;
+  border-top: 1px solid var(--ink-12);
+  display: grid;
+  gap: 1.1rem;
+  min-width: 0;
+}
+.brief legend {
+  float: left;            /* keeps the legend inside the grid instead of on the rule */
+  width: 100%;
+  padding: 0;
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.1rem;
+}
+.field .field__label { font-size: 0.95rem; font-weight: 500; }
+.field textarea.short { min-height: 96px; }
+.req { color: #C0272D; }
+
+.checks { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.field .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.95rem;
+  border: 2px solid var(--ink-12);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease;
+}
+.check input { width: 1rem; height: 1rem; margin: 0; accent-color: var(--ink); }
+.check:hover { border-color: var(--ink); }
+.check:has(input:checked) { background: rgba(111, 231, 193, 0.35); border-color: var(--ink); }
+.check:has(input:focus-visible) { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+/* .form sets display:grid, which would otherwise beat the hidden attribute. */
+.brief__form[hidden], .brief__done[hidden] { display: none; }
+.brief__done { padding: 1rem 0 0.5rem; }
+.brief__done .thanks__mark { margin-inline: auto; }
+.brief__done h2 { outline: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .brief[open] { animation: thanks-in .26s cubic-bezier(.3, .9, .3, 1); }
+}

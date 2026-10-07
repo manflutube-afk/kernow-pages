@@ -291,6 +291,110 @@
     });
   }
 
+  /* ---- Logo brief modal ----
+     The "Start your logo brief" button is a plain link to /contact, so it
+     still goes somewhere without JavaScript or <dialog>. When both are there
+     the brief opens in a pop-up instead and is sent with fetch, like the
+     contact form. Clicking the backdrop deliberately doesn't close this one:
+     it's a long form, and one stray tap shouldn't hide it.              */
+  var brief = document.getElementById('logo-brief');
+  var briefForm = document.getElementById('logo-form');
+  var briefOpeners = document.querySelectorAll('[data-logo-brief]');
+
+  if (brief && briefForm && briefOpeners.length && typeof brief.showModal === 'function' && window.fetch) {
+    var briefSubmit = document.getElementById('logo-submit');
+    var briefStatus = document.getElementById('logo-status');
+    var briefDone = document.getElementById('logo-done');
+    var briefSending = false;
+
+    var briefMessage = function (message) {
+      if (!briefStatus) return;
+      briefStatus.textContent = message;
+      briefStatus.classList.add('form-status--error', 'is-visible');
+      briefStatus.scrollIntoView({ block: 'nearest' });
+    };
+
+    // After a brief has gone, the next open starts with a clean form.
+    var briefReset = function () {
+      if (!briefDone || briefDone.hidden) return;
+      briefForm.reset();
+      briefForm.hidden = false;
+      briefDone.hidden = true;
+      if (briefStatus) briefStatus.classList.remove('is-visible', 'form-status--error');
+    };
+
+    briefOpeners.forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        briefReset();
+        try {
+          brief.showModal();
+        } catch (err) {
+          window.location.href = btn.href;
+        }
+      });
+    });
+
+    ['logo-brief-close', 'logo-done-close'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', function () { brief.close(); });
+    });
+
+    briefForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (briefSending) return;
+      briefSending = true;
+      if (briefStatus) briefStatus.classList.remove('is-visible');
+      if (briefSubmit) {
+        briefSubmit.disabled = true;
+        briefSubmit.textContent = 'Sending…';
+      }
+
+      // Ticked boxes share a name, so gather them as lists rather than
+      // letting each one overwrite the last.
+      var data = {};
+      new FormData(briefForm).forEach(function (value, key) {
+        if (key in data) data[key] = [].concat(data[key], value);
+        else data[key] = value;
+      });
+
+      fetch(briefForm.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) {
+          return res.json().catch(function () { return { ok: false }; });
+        })
+        .then(function (result) {
+          if (result && result.ok) {
+            var target = document.getElementById('logo-done-email');
+            if (target && data.email) target.textContent = data.email;
+            briefForm.hidden = true;
+            if (briefDone) {
+              briefDone.hidden = false;
+              var title = document.getElementById('logo-done-title');
+              if (title) title.focus();
+            }
+          } else {
+            briefMessage(((result && result.error) || 'Something went wrong sending that.') +
+              ' Please email me directly at ' + (briefForm.dataset.email || 'contact@leodiablo.com') + '.');
+          }
+        })
+        .catch(function () {
+          briefMessage('Something went wrong sending that. Please email me directly at ' +
+            (briefForm.dataset.email || 'contact@leodiablo.com') + '.');
+        })
+        .then(function () {
+          briefSending = false;
+          if (briefSubmit) {
+            briefSubmit.disabled = false;
+            briefSubmit.textContent = 'Send my brief';
+          }
+        });
+    });
+  }
+
   /* ---- Ko-fi support modal ----
      The support buttons are ordinary links to ko-fi.com, so they still work
      with JavaScript off or if <dialog> isn't supported. When it is, the click

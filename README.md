@@ -15,7 +15,8 @@ package.json            Just wrangler + the three scripts below
 
 functions/
   api/contact.js        POST /api/contact — validates the enquiry, sends it
-                        via Resend. The file path IS the route.
+                        via Resend. The file path IS the route. Also takes
+                        the home page's logo brief (form=logo).
 
 site/                   Everything here is uploaded as a static asset
   index.html            Home — hero with the live-typing browser mock-up
